@@ -1,4 +1,4 @@
-define(function(){
+
     var sel = {
         multiSelect: function(opts, callBack) {
             /*
@@ -251,4 +251,3 @@ define(function(){
 
     };
     return sel;
-})
