@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="multiSelect.js"></script>-->
+    <script src="linkageInput.js"></script>
+</head>
+<style>
+    .box{
+       /* padding-left: 8px;
+        padding-right: 24px;*/
+        border: 1px solid #dddddd;
+        border-color: #dddddd;
+        height: 40px;
+        line-height: 40px;
+        width: 307px;
+    }
+    .box-span{
+        max-width: 86.0104px;
+        color: rgba(0, 0, 0, 0.85);
+        margin-top: 8px;
+        background: rgb(255, 255, 255);
+        font-size: 14px !important;
+    }
+
+</style>
+<body>
+<div class="box">
+    <input type="hidden" class="box-area">
+    <div id="province"></div>
+    <i style="color: rgba(0, 0, 0, 0.85);font-size: 14px;">/</i>
+    <div id="city" style="display: inline-block;font-size: 14px;padding: 0 20px;">请选择</div>
+    <i style="color: rgba(0, 0, 0, 0.85);font-size: 14px;">/</i>
+    <div id="area" style="display: inline-block;font-size: 14px;padding: 0 20px;">请选择</div>
+</div>
+<br/>
+<div id="test"></div>
+</body>
+<script>
+    var data = {
+        province:[{id:440000,name:"广东省"}],
+        city:[
+            {id:440100,name:"广州市"},
+            {id:440200,name:"阳江市"}
+        ],
+        area:[
+            {id:440111,name:"白云区"},
+            {id:440112,name:"番禺区"},
+            {id:440113,name:"天河区"},
+            {id:440114,name:"荔湾区"},
+            {id:440115,name:"海珠区"},
+            {id:440116,name:"越秀区"},
+            {id:440117,name:"花都区"},
+            {id:440118,name:"从化区"},
+            {id:440119,name:"南沙区"},
+            {id:440110,name:"增城区"},
+
+            {id:440210,name:"江城区"},
+            {id:440211,name:"阳东区"},
+            {id:440212,name:"阳西区"}
+        ]
+    }
+    var linkageInput = new LcwFactory()
+    linkageInput.multiSelect({
+            id:"province",
+            data:data.province,
+            multiSelect:false,
+            dataKey:["id","name"],
+            searchBar:true,
+            btnWidth : 84,
+        },function(){
+
+            linkageInput.multiSelect({
+                    id:"city",
+                    data:data.city,
+                    multiSelect:false,
+                    dataKey:["id","name"],
+                    searchBar:true,
+                    btnWidth : 84,
+                    dropdownStatus : "block"
+                },function(){
+                    var arg = arguments[0].substr(2,2);
+                    var _len = data.area.length;
+                    var _data = [];
+                    for(var i=0;i<_len;i++ ){
+                        if (arg == (data.area[i].id).toString().substr(2,2)) {
+                            _data.push(data.area[i])
+                        }
+                    }
+                    linkageInput.multiSelect({
+                            id:"area",
+                            data:_data,
+                            multiSelect:false,
+                            dataKey:["id","name"],
+                            searchBar:true,
+                            btnWidth : 84,
+                            dropdownStatus : "block"
+                        },function(){
+                            //console.log(1)
+                        }
+                    );
+
+
+                }
+            );
+        }
+    );
+
+
+
+
+</script>
+</html>
